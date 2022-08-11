@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using VRChat.API.Api;
+﻿using VRChat.API.Api;
 using VRChat.API.Client;
 using VRChat.API.Model;
 using VrChatBouncerBot.UI;

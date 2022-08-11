@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using VRChat.API.Api;
 using VrChatBouncerBot;
+using VrChatBouncerBot.AutoMode;
 using VrChatBouncerBot.Client;
 using VrChatBouncerBot.Fetching;
 using VrChatBouncerBot.Inviting;
@@ -35,8 +36,15 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<INotificationsApi>(services => services.GetRequiredService<IApiClientFactory>().CreateNotificationClient());
             services.AddTransient<IInviteApi>(services => services.GetRequiredService<IApiClientFactory>().CreateInviteClient());
             services.AddTransient<IWorldsApi>(services => services.GetRequiredService<IApiClientFactory>().CreateWorldClient());
+            services.AddTransient<IUsersApi>(services => services.GetRequiredService<IApiClientFactory>().CreatUsersClient());
 
             services.AddSingleton<IConsoleContentManager, ConsoleContentManager>();
+
+            services.AddSingleton<UserFetcherController>();
+            services.AddSingleton<IUserFetcherController>(s => s.GetRequiredService<UserFetcherController>());
+            services.AddSingleton<IUserFetcherState>(s => s.GetRequiredService<UserFetcherController>());
+            services.AddTransient<IInstanceCapacityChecker, InstanceCapacityChecker>();
+            services.AddSingleton<IAutoModeWorker, AutoModeWorker>();
 
             return services;
         }

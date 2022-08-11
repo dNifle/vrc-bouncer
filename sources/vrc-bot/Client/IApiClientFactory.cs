@@ -8,5 +8,7 @@ namespace VrChatBouncerBot.Client
         IInviteApi CreateInviteClient();
         INotificationsApi CreateNotificationClient();
         IWorldsApi CreateWorldClient();
+        IInstancesApi CreatInstanceClient();
+        IUsersApi CreatUsersClient();
     }
 }

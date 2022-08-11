@@ -8,19 +8,22 @@ namespace VrChatBouncerBot.Fetching
         private readonly UserFetcherOptions OPTIONS;
         private readonly IUserFetcher FETCHER;
         private readonly CancellationTokenSource TOKEN_SOURCE = new CancellationTokenSource();
+        private readonly IUserFetcherState STATE;
 
-        public UserFetchWorker(IUserFetcher fetcher, UserFetcherOptions options)
+        public UserFetchWorker(IUserFetcher fetcher, UserFetcherOptions options, IUserFetcherState state)
         {
             FETCHER = fetcher ?? throw new ArgumentNullException(nameof(fetcher));
             OPTIONS = options ?? throw new ArgumentNullException(nameof(options));
             FETCHING_TASK = new Task(Fetch);
+            STATE = state ?? throw new ArgumentNullException(nameof(state));
         }
 
         private async void Fetch()
         {
             while (!TOKEN_SOURCE.IsCancellationRequested)
             {
-                await FETCHER.FetchInviteRequestingUsersAsync(TOKEN_SOURCE.Token);
+                if(STATE.IsRunning)
+                    await FETCHER.FetchInviteRequestingUsersAsync(TOKEN_SOURCE.Token);
 
                 try
                 {
