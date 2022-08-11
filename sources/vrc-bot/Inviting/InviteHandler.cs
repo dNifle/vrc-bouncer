@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using VrChatBouncerBot.UI;
+﻿using VrChatBouncerBot.UI;
 
 namespace VrChatBouncerBot.Inviting
 {

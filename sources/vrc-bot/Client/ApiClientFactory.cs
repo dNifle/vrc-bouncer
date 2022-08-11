@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
-using VRChat.API.Api;
+﻿using VRChat.API.Api;
 using VRChat.API.Client;
-using VRChat.API.Model;
 using VrChatBouncerBot.UI;
 
 namespace VrChatBouncerBot.Client
@@ -51,6 +49,18 @@ namespace VrChatBouncerBot.Client
         {
             if (!_loggedIn) LogIn();
             return new WorldsApi(API.Client, API.AsynchronousClient, API.Configuration);
+        }
+
+        public IUsersApi CreatUsersClient()
+        {
+            if (!_loggedIn) LogIn();
+            return new UsersApi(API.Client, API.AsynchronousClient, API.Configuration);
+        }
+
+        public IInstancesApi CreatInstanceClient()
+        {
+            if (!_loggedIn) LogIn();
+            return new InstancesApi(API.Client, API.AsynchronousClient, API.Configuration);
         }
 
         private void LogIn()

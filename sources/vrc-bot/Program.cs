@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using VRChat.API.Api;
 
 var builder = new HostBuilder();
 builder.ConfigureDefaults(args);
